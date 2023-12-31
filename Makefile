@@ -1,72 +1,61 @@
-# Copyright 1996-2020 Cyberbotics Ltd.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+/*
+ * File:          my_controller.c
+ * Date:
+ * Description:
+ * Author:
+ * Modifications:
+ */
 
-### Generic Makefile.include for Webots controllers, physics plugins, robot
-### window libraries, remote control libraries and other libraries
-### to be used with GNU make
-###
-### Platforms: Windows, macOS, Linux
-### Languages: C, C++
-###
-### Authors: Olivier Michel, Yvan Bourquin, Fabien Rohrer
-###          Edmund Ronald, Sergei Poskriakov
-###
-###-----------------------------------------------------------------------------
-###
-### This file is meant to be included from the Makefile files located in the
-### Webots projects subdirectories. It is possible to set a number of variables
-### to customize the build process, i.e., add source files, compilation flags,
-### include paths, libraries, etc. These variables should be set in your local
-### Makefile just before including this Makefile.include. This Makefile.include
-### should never be modified.
-###
-### Here is a description of the variables you may set in your local Makefile:
-###
-### ---- C Sources ----
-### if your program uses several C source files:
-### C_SOURCES = my_plugin.c my_clever_algo.c my_graphics.c
-###
-### ---- C++ Sources ----
-### if your program uses several C++ source files:
-### CXX_SOURCES = my_plugin.cc my_clever_algo.cpp my_graphics.c++
-###
-### ---- Compilation options ----
-### if special compilation flags are necessary:
-### CFLAGS = -Wno-unused-result
-###
-### ---- Linked libraries ----
-### if your program needs additional libraries:
-### INCLUDE = -I"/my_library_path/include"
-### LIBRARIES = -L"/path/to/my/library" -lmy_library -lmy_other_library
-###
-### ---- Linking options ----
-### if special linking flags are needed:
-### LFLAGS = -s
-###
-### ---- Webots included libraries ----
-### if you want to use the Webots C API in your C++ controller program:
-### USE_C_API = true
-###
-### ---- Debug mode ----
-### if you want to display the gcc command line for compilation and link, as
-### well as the rm command details used for cleaning:
-### VERBOSE = 1
-###
-###-----------------------------------------------------------------------------
+/*
+ * You may need to add include files like <webots/distance_sensor.h> or
+ * <webots/motor.h>, etc.
+ */
+#include <webots/robot.h>
 
-### Do not modify: this includes Webots global Makefile.include
-null :=
-space := $(null) $(null)
-WEBOTS_HOME_PATH=$(subst $(space),\ ,$(strip $(subst \,/,$(WEBOTS_HOME))))
-include $(WEBOTS_HOME_PATH)/resources/Makefile.include
+/*
+ * You may want to add macros here.
+ */
+#define TIME_STEP 64
+
+/*
+ * This is the main program.
+ * The arguments of the main function can be specified by the
+ * "controllerArgs" field of the Robot node
+ */
+int main(int argc, char **argv) {
+  /* necessary to initialize webots stuff */
+  wb_robot_init();
+
+  /*
+   * You should declare here WbDeviceTag variables for storing
+   * robot devices like this:
+   *  WbDeviceTag my_sensor = wb_robot_get_device("my_sensor");
+   *  WbDeviceTag my_actuator = wb_robot_get_device("my_actuator");
+   */
+
+  /* main loop
+   * Perform simulation steps of TIME_STEP milliseconds
+   * and leave the loop when the simulation is over
+   */
+  while (wb_robot_step(TIME_STEP) != -1) {
+    /*
+     * Read the sensors :
+     * Enter here functions to read sensor data, like:
+     *  double val = wb_distance_sensor_get_value(my_sensor);
+     */
+
+    /* Process sensor data here */
+
+    /*
+     * Enter here functions to send actuator commands, like:
+     * wb_motor_set_position(my_actuator, 10.0);
+     */
+  };
+
+  /* Enter your cleanup code here */
+
+  /* This is necessary to cleanup webots resources */
+  wb_robot_cleanup();
+
+  return 0;
+}
