@@ -1,0 +1,515 @@
+#VRML_SIM R2020b utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation 0.02271001594791256 0.9755058223771549 0.21879818482774532 3.0573892851548594
+  position 0.8900250699406302 7.4081868017372905 -15.065156469169654
+}
+TexturedBackground {
+  texture "mars"
+  skyColor [
+    0.1 0 0.1
+  ]
+}
+TexturedBackgroundLight {
+  texture "mars"
+}
+RectangleArena {
+  translation -0.359557 0.15938 0.293735
+  rotation 0 1 0 0.0458149
+  floorSize 10 10
+  floorTileSize 1 1
+  floorAppearance Appearance {
+    texture ImageTexture {
+      url [
+        "textures/chessboard.jpg"
+      ]
+      filtering 0
+    }
+  }
+  wallThickness 0.02
+  wallHeight 0.7
+  wallAppearance BrushedAluminium {
+    colorOverride 0 0 0
+    IBLStrength 0
+  }
+}
+PottedTree {
+  translation -3.51557 0.16 3.44224
+}
+PottedTree {
+  translation 4.4649 0.16 0.07878
+  name "potted tree(2)"
+}
+PottedTree {
+  translation -3.56339 0.16 -3.19369
+  name "potted tree(4)"
+}
+PottedTree {
+  translation 0.895722 0.16 -2.42754
+  name "potted tree(5)"
+}
+PottedTree {
+  translation 1.34619 0.16 4.21754
+  name "potted tree(3)"
+}
+PottedTree {
+  translation -5.07959 0.16 0.329985
+  name "potted tree(1)"
+}
+WoodenBox {
+  translation 3.74435 0.46 4.74203
+  rotation 0 1 0 0.215984
+  name "wooden box(2)"
+}
+WoodenBox {
+  translation 4.44167 0.45 4.36678
+  rotation 0 -1 0 1.83914
+  name "wooden box(4)"
+}
+WoodenBox {
+  translation 4.17362 1.05 4.52082
+  rotation 0 -1 0 1.04065
+  name "wooden box(5)"
+}
+WoodenBox {
+  translation -0.488333 0.46 2.37051
+  rotation 0 1 0 0.0458144
+  name "wooden box(3)"
+}
+WoodenBox {
+  translation 2.60688 0.46 -4.5225
+  rotation 0 1 0 0.0458144
+  name "wooden box(1)"
+}
+DEF PIONEER_3DX Pioneer3dx {
+  hidden position_0_0 -6.323988039554881
+  hidden position_0_1 1259.9689044760687
+  hidden position_0_2 1099.3148573749177
+  hidden translation_1 -0.0004951474136195252 -0.0011404855100325406 0.1924094980899103
+  hidden rotation_1 -0.0074288470748293195 -0.9999555975648499 -0.005797855626257676 6.266562572113421
+  hidden position_1_0 -3147.175948803702
+  hidden rotation_2 -1 0 0 5.583295213908647
+  hidden translation_4 -0.16589565419762375 -0.00015845741187208015 0.00015747219870115216
+  hidden rotation_4 0.9337647940389243 -0.19979984782797935 -0.2969231048964719 0.04217911768213383
+  hidden translation_9 0.16583287072487451 -0.0005099486807898273 0.00020773513973098808
+  hidden rotation_9 0.9999999324095568 0.0003675962771115765 -7.3388692232692404e-06 4.609594469484936
+  hidden position_30_0 -4.835169098030043e-11
+  translation -2.949065752917544 0.25432919581236824 2.6548833248680976
+  rotation 0.11406621383281212 -0.9932961943807065 0.018750175749915474 0.2527265222942798
+  controller "Robot_Controller"
+  extensionSlot [
+    Receiver {
+      type "infra-red"
+      channel 1
+    }
+    Camera {
+      translation 0 0.17 -0.13
+      recognitionColors [
+        1 1 1
+      ]
+      fieldOfView 1
+      antiAliasing TRUE
+      lens Lens {
+      }
+      focus Focus {
+      }
+      zoom Zoom {
+      }
+    }
+    Kinect {
+      translation 0 0.15 -0.05
+      width 150
+      height 100
+    }
+  ]
+}
+DEF Blue_Bot Robot {
+  translation -2.113000794025889 0.15915287319128765 -2.98884997538634
+  rotation -0.008496604044510159 0.9998626520591111 0.01422971317461958 2.0651164169292766
+  children [
+    DEF MAIN_BODY Transform {
+      translation 0 0.0415 0
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.0820075 0.364731 0.8
+            roughness 1
+            metalness 0
+          }
+          geometry DEF BODY Cylinder {
+            height 0.08
+            radius 0.045
+          }
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position -2.8480767556926315e-06
+        axis -1 0 0
+        anchor 0 0.025 0
+      }
+      device [
+        RotationalMotor {
+          name "left wheel motor"
+          consumptionFactor 70
+          maxVelocity 100
+        }
+        PositionSensor {
+          name "left wheel sensor"
+        }
+      ]
+      endPoint Solid {
+        translation -0.04499999999999927 0.025 0
+        rotation 1 0 0 4.984672848076812
+        children [
+          DEF WHEEL Transform {
+            rotation 0 0 1 1.57
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 1 0 0
+                  roughness 1
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.01
+                  radius 0.025
+                }
+              }
+            ]
+          }
+        ]
+        name "left wheel"
+        boundingObject USE WHEEL
+        physics DEF PHYSICS_WHEEL Physics {
+          density -1
+          mass 0.05
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position -2.2430028397865406e-06
+        axis -1 0 0
+        anchor 0 0.025 0
+      }
+      device [
+        RotationalMotor {
+          name "right wheel motor"
+          consumptionFactor 70
+          maxVelocity 100
+        }
+        PositionSensor {
+          name "right wheel sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0.04499999999999905 0.025 0
+        rotation 1 0 0 4.587352243002842
+        children [
+          USE WHEEL
+        ]
+        name "right wheel"
+        boundingObject USE WHEEL
+        physics USE PHYSICS_WHEEL
+      }
+    }
+    DEF LEFT_EYE DistanceSensor {
+      translation -0.02 0.063 -0.042
+      rotation 0 1 0 2.07
+      children [
+        DEF SENSOR Transform {
+          rotation 0 0 1 1.57
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.975691 0.981481 0.0252992
+                roughness 1
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.004
+                radius 0.008
+              }
+            }
+          ]
+        }
+      ]
+      name "ds0"
+      lookupTable [
+        0 1024 0
+        0.05 1024 0
+        0.15 0 0
+      ]
+      numberOfRays 2
+      aperture 1
+    }
+    DEF RIGHT_EYE DistanceSensor {
+      translation 0.02 0.063 -0.042
+      rotation 0 1 0 1.07
+      children [
+        USE SENSOR
+      ]
+      name "ds1"
+      lookupTable [
+        0 1024 0
+        0.05 1024 0
+        0.15 0 0
+      ]
+      numberOfRays 2
+      aperture 1
+    }
+    DEF SMILE Transform {
+      translation 0 0.025 -0.036
+      rotation 0.7745972408364944 0.44721228048294853 0.4472139204829502 1.8234794
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.721569 0.290196 0.290196
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.018
+            radius 0.009
+            subdivision 3
+          }
+        }
+      ]
+    }
+    DEF EMITTER Emitter {
+      translation 0 0.06 0
+      rotation 0 1 0 3.1415
+      children [
+        DEF RANGE Transform {
+          translation 0 0.05 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 0 1
+                roughness 1
+                metalness 0
+              }
+              geometry Sphere {
+                radius 0.4
+                subdivision 2
+              }
+            }
+          ]
+        }
+      ]
+      type "infra-red"
+      range 0.4
+      channel 1
+    }
+  ]
+  name "MyBot emitter(B)"
+  boundingObject DEF MYBOT_BOUNDING Transform {
+    translation 0 0.0415 0
+    children [
+      USE BODY
+    ]
+  }
+  physics DEF MYBOT_PHYSICS Physics {
+    density -1
+    mass 0.5
+  }
+  controller "Blue_Controller"
+}
+DEF Red_Bot Robot {
+  translation 2.737202810497323 0.15915287319129567 3.021497531918395
+  rotation 0.003026450157201012 0.9998941679107733 0.014230023804194365 -2.7225432624779535
+  children [
+    DEF MAIN_BODY Transform {
+      translation 0 0.0415 0
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.0820075 0.364731 0.8
+            roughness 1
+            metalness 0
+          }
+          geometry DEF BODY Cylinder {
+            height 0.08
+            radius 0.045
+          }
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 4.63006234505038e-06
+        axis -1 0 0
+        anchor 0 0.025 0
+      }
+      device [
+        RotationalMotor {
+          name "left wheel motor"
+          consumptionFactor 70
+          maxVelocity 100
+        }
+        PositionSensor {
+          name "left wheel sensor"
+        }
+      ]
+      endPoint Solid {
+        translation -0.04499999999999869 0.025 0
+        rotation 1 0 0 4.9846653699377415
+        children [
+          DEF WHEEL Transform {
+            rotation 0 0 1 1.57
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 1 0 0
+                  roughness 1
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.01
+                  radius 0.025
+                }
+              }
+            ]
+          }
+        ]
+        name "left wheel"
+        boundingObject USE WHEEL
+        physics DEF PHYSICS_WHEEL Physics {
+          density -1
+          mass 0.05
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 1.4261213636372393e-06
+        axis -1 0 0
+        anchor 0 0.025 0
+      }
+      device [
+        RotationalMotor {
+          name "right wheel motor"
+          consumptionFactor 70
+          maxVelocity 100
+        }
+        PositionSensor {
+          name "right wheel sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0.04499999999999825 0.025 0
+        rotation 0.9999999999999999 0 0 4.587348573878633
+        children [
+          USE WHEEL
+        ]
+        name "right wheel"
+        boundingObject USE WHEEL
+        physics USE PHYSICS_WHEEL
+      }
+    }
+    DEF LEFT_EYE DistanceSensor {
+      translation -0.02 0.063 -0.042
+      rotation 0 1 0 2.07
+      children [
+        DEF SENSOR Transform {
+          rotation 0 0 1 1.57
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.975691 0.981481 0.0252992
+                roughness 1
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.004
+                radius 0.008
+              }
+            }
+          ]
+        }
+      ]
+      name "ds0"
+      lookupTable [
+        0 1024 0
+        0.05 1024 0
+        0.15 0 0
+      ]
+      numberOfRays 2
+      aperture 1
+    }
+    DEF RIGHT_EYE DistanceSensor {
+      translation 0.02 0.063 -0.042
+      rotation 0 1 0 1.07
+      children [
+        USE SENSOR
+      ]
+      name "ds1"
+      lookupTable [
+        0 1024 0
+        0.05 1024 0
+        0.15 0 0
+      ]
+      numberOfRays 2
+      aperture 1
+    }
+    DEF SMILE Transform {
+      translation 0 0.025 -0.036
+      rotation 0.7745972408364944 0.44721228048294853 0.4472139204829502 1.8234794
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.721569 0.290196 0.290196
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.018
+            radius 0.009
+            subdivision 3
+          }
+        }
+      ]
+    }
+    DEF EMITTER Emitter {
+      translation 0 0.06 0
+      rotation 0 1 0 3.1415
+      children [
+        DEF RANGE Transform {
+          translation 0 0.05 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 1 0 0
+                roughness 1
+                metalness 0
+              }
+              geometry Sphere {
+                radius 0.4
+                subdivision 2
+              }
+            }
+          ]
+        }
+      ]
+      type "infra-red"
+      range 0.4
+      channel 1
+    }
+  ]
+  name "MyBot emitter"
+  boundingObject DEF MYBOT_BOUNDING Transform {
+    translation 0 0.0415 0
+    children [
+      USE BODY
+    ]
+  }
+  physics DEF MYBOT_PHYSICS Physics {
+    density -1
+    mass 0.5
+  }
+  controller "Red_Controller"
+}
