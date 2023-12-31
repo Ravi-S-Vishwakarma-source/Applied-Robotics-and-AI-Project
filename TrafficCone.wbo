@@ -1,0 +1,6 @@
+#VRML_OBJ R2020b utf8
+TrafficCone {
+  translation 4.09265 0 3.13193
+  rotation 0 1 0 -1.047195307179586
+  name "traffic cone(2)"
+}

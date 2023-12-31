@@ -1,0 +1,6 @@
+#VRML_OBJ R2020b utf8
+PlasticCrate {
+  translation -0.276141 0 3.89221
+  rotation 0 -1 0 0.916294
+  size 0.3 0.2 0.5
+}
